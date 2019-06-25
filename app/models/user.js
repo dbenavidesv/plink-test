@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       lastName: { type: DataTypes.STRING, allowNull: false },
       password: { type: DataTypes.STRING, allowNull: false },
       // eslint-disable-next-line new-cap
-      preferredCurrency: { type: DataTypes.ENUM(['COP', 'USD', 'EUR']) }
+      preferredCurrency: { type: DataTypes.ENUM(['COP', 'USD', 'EUR']), allowNull: false }
     },
     {
       tableName: 'users',

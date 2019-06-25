@@ -27,7 +27,8 @@ module.exports = {
       },
       preferred_currency: {
         // eslint-disable-next-line new-cap
-        type: Sequelize.ENUM(['COP', 'USD', 'EUR'])
+        type: Sequelize.ENUM(['COP', 'USD', 'EUR']),
+        allowNull: false
       },
       created_at: {
         allowNull: false,
