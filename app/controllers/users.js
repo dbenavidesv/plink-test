@@ -4,6 +4,7 @@ const usersService = require('../services/users');
 exports.userSignUp = (req, res, next) => {
   logger.info(`${req.method} ${req.path} start... User registration.`);
   const user = req.body;
+  logger.info(user);
   return usersService
     .registerUser(user)
     .then(cretedUser => {
