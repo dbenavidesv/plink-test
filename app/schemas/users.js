@@ -9,7 +9,7 @@ exports.signUp = {
   password: {
     in: ['body'],
     isLength: { options: { min: 6, max: 30 } },
-    isAlpha: true,
+    isAlphanumeric: true,
     trim: true,
     errorMessage: 'Invalid password, please enter one with 6 or more characters.'
   },
