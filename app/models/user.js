@@ -5,11 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       username: { type: DataTypes.STRING, unique: true, allowNull: false },
-      firstName: { type: DataTypes.STRING, allowNull: false },
-      lastName: { type: DataTypes.STRING, allowNull: false },
+      firstName: { type: DataTypes.STRING, field: 'first_name', allowNull: false },
+      lastName: { type: DataTypes.STRING, field: 'last_name', allowNull: false },
       password: { type: DataTypes.STRING, allowNull: false },
-      // eslint-disable-next-line new-cap
-      preferredCurrency: { type: DataTypes.ENUM(['COP', 'USD', 'EUR']), allowNull: false }
+      preferredCurrency: {
+        // eslint-disable-next-line new-cap
+        type: DataTypes.ENUM(['COP', 'USD', 'EUR']),
+        field: 'preferred_currency',
+        defaultValue: 'USD',
+        allowNull: false
+      }
     },
     {
       tableName: 'users',

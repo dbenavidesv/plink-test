@@ -6,6 +6,11 @@ exports.userSignUp = (req, res, next) => {
   const user = req.body;
   return usersService
     .registerUser(user)
-    .then(result => res.status(201).send(result))
+    .then(cretedUser => {
+      logger.info(`User inserted with id: ${cretedUser.id}`);
+      return res
+        .status(201)
+        .send({ message: `User ${cretedUser.username} registered with id: ${cretedUser.id}` });
+    })
     .catch(next);
 };

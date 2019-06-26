@@ -1,11 +1,12 @@
-const errors = require('../errors'),
-  logger = require('../logger');
+const errors = require('../errors');
+const logger = require('../logger');
 
 const DEFAULT_STATUS_CODE = 500;
 
 const statusCodes = {
   [errors.DATABASE_ERROR]: 503,
-  [errors.DEFAULT_ERROR]: 500
+  [errors.DEFAULT_ERROR]: 500,
+  [errors.UNIQUE_USERNAME_ERROR]: 409
 };
 
 exports.handle = (error, req, res, next) => {
