@@ -14,3 +14,6 @@ exports.schemaError = message => internalError(message, exports.INVALID_INPUT_ER
 
 exports.UNIQUE_USERNAME_ERROR = 'unique_username_error';
 exports.uniqueUsernameError = message => internalError(message, exports.UNIQUE_USERNAME_ERROR);
+
+exports.BAD_LOGIN_ERROR = 'bad_login_error';
+exports.badLogInError = message => internalError(message, exports.BAD_LOGIN_ERROR);

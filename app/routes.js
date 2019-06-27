@@ -1,7 +1,8 @@
 const { healthCheck } = require('./controllers/health_check');
 const users = require('./controllers/users');
+const sessions = require('./controllers/sessions');
 const squemaValidator = require('./middlewares/schema_validator');
-const mapper = require('./middlewares/mapper');
+const mappers = require('./middlewares/mappers');
 const usersSchemas = require('./schemas/users');
 
 exports.init = app => {
@@ -9,7 +10,9 @@ exports.init = app => {
 
   app.post(
     '/users',
-    [mapper.bodyToCamelCase, squemaValidator.validateSchemaAndFail(usersSchemas.signUp)],
-    users.userSignUp
+    [mappers.bodyToCamelCase, squemaValidator.validateSchemaAndFail(usersSchemas.signUp)],
+    users.signUp
   );
+
+  app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);
 };
