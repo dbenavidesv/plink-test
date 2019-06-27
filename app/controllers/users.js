@@ -2,7 +2,7 @@ const logger = require('../logger');
 const sessionsHelpers = require('../helpers/sessions');
 const usersService = require('../services/users');
 
-exports.userSignUp = (req, res, next) => {
+exports.signUp = (req, res, next) => {
   logger.info(`${req.method} ${req.path} start... User registration.`);
   const user = req.body;
   logger.info(user);

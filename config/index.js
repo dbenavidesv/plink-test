@@ -40,7 +40,9 @@ const config = {
     },
     session: {
       header_name: 'authorization',
-      secret: process.env.NODE_API_SESSION_SECRET
+      expirationTime: process.env.JWT_EXPIRATION_TIME,
+      secret: process.env.NODE_API_SESSION_SECRET,
+      saltRounds: process.env.ENCRYPTION_SALT_ROUNDS
     }
   }
 };

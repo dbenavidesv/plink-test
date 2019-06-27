@@ -9,3 +9,8 @@ exports.registerUser = user =>
         ? Promise.reject(errors.uniqueUsernameError('The provided username is already taken.'))
         : Promise.reject(errors.databaseError(`${error.name}: ${error.message}`))
     );
+
+exports.findUserBy = params =>
+  User.findOne({ where: params, raw: true }).catch(error =>
+    Promise.reject(errors.databaseError(`${error.name}: ${error.message}`))
+  );

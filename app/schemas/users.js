@@ -33,3 +33,20 @@ exports.signUp = {
     errorMessage: 'Invalid currency. Please enter one of the following: COP, USD, EUR.'
   }
 };
+
+exports.logIn = {
+  username: {
+    in: ['body'],
+    exists: true,
+    matches: { options: /^[a-z0-9_-]+$/i },
+    trim: true,
+    errorMessage: 'Please enter a valid username.'
+  },
+  password: {
+    in: ['body'],
+    exists: true,
+    isAlphanumeric: true,
+    trim: true,
+    errorMessage: 'Please enter a valid password'
+  }
+};
