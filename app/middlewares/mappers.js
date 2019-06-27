@@ -1,17 +1,6 @@
-const keysToCamelCase = snakeSpineJson => {
-  const camelJson = {};
-  const toCamelCase = key =>
-    key
-      .replace(/[-_][a-z]/gi, idx => idx.toUpperCase())
-      .replace('_', '')
-      .replace('-', '');
-  Object.keys(snakeSpineJson).forEach(key => {
-    camelJson[toCamelCase(key)] = snakeSpineJson[key];
-  });
-  return camelJson;
-};
+const requestsHelpers = require('../helpers/requests');
 
 exports.bodyToCamelCase = (req, res, next) => {
-  req.body = keysToCamelCase(req.body);
+  req.body = requestsHelpers.keysToCamelCase(req.body);
   return next();
 };

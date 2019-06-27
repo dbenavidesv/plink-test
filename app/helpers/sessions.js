@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken-promisified');
 
 const config = require('../../config').common.session;
 
-exports.encodePassword = password => bcrypt.hash(password, 10);
+exports.encodePassword = password => bcrypt.hash(password, parseInt(config.saltRounds));
 
 exports.comparePassword = (password, hashedPassword) => bcrypt.compare(password, hashedPassword);
 
