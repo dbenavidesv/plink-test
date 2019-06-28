@@ -3,7 +3,7 @@ module.exports = {
   up: (queryInterface, Sequelize) =>
     queryInterface.createTable('crypto_coins', {
       id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         primaryKey: true,
         allowNull: false
       },
@@ -19,11 +19,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      preferred_currency: {
-        // eslint-disable-next-line new-cap
-        type: Sequelize.ENUM(['COP', 'USD', 'EUR']),
-        allowNull: false
-      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -33,12 +28,12 @@ module.exports = {
         allowNull: false
       },
       created_at: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       },
       updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        allowNull: false
       }
     }),
   down: queryInterface => queryInterface.dropTable('crypto_coins')

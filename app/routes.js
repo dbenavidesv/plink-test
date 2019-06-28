@@ -1,4 +1,5 @@
 const { healthCheck } = require('./controllers/health_check');
+const cryptoCoins = require('./controllers/crypto_coins');
 const users = require('./controllers/users');
 const sessions = require('./controllers/sessions');
 const squemaValidator = require('./middlewares/schema_validator');
@@ -15,4 +16,5 @@ exports.init = app => {
   );
 
   app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);
+  app.post('/crypto-coins', cryptoCoins.buyCoin);
 };
