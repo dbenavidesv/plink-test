@@ -22,7 +22,8 @@ exports.logIn = (req, res, next) => {
           .status(200)
           .set({ authorization: token })
           .send({
-            message: `User authenticated. Session expires at ${sessionsHelpers.getExpirationTime(token)}`
+            message: `User ${inUser.username} authenticated`,
+            expirationTime: `${sessionsHelpers.getExpirationTime(token)}`
           });
       }
       return Promise.reject(errors.badLogInError('The username or password provided is incorrect'));

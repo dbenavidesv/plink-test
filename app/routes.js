@@ -15,6 +15,14 @@ exports.init = app => {
     [mappersMiddleware.bodyToCamelCase, squemaValidator.validateSchemaAndFail(usersSchemas.signUp)],
     users.signUp
   );
+  app.get(
+    '/users/:id/crypto-coins',
+    [
+      sessionsMiddleware.isUserAuthenticated,
+      squemaValidator.validateSchemaAndFail(usersSchemas.getUserCoinsList)
+    ],
+    users.geUserCoinsList
+  );
 
   app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);
 
