@@ -11,3 +11,11 @@ exports.keysToCamelCase = snakeSpineJson => {
   });
   return camelJson;
 };
+
+exports.mapCoinObject = (coin, userId) => ({
+  id: coin.coin_id,
+  coinName: coin.coin_name,
+  source: coin.source,
+  price: coin.last_price,
+  userId
+});

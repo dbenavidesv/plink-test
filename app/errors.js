@@ -17,3 +17,15 @@ exports.uniqueUsernameError = message => internalError(message, exports.UNIQUE_U
 
 exports.BAD_LOGIN_ERROR = 'bad_login_error';
 exports.badLogInError = message => internalError(message, exports.BAD_LOGIN_ERROR);
+
+exports.SESSION_ERROR = 'session_error';
+exports.sessionError = message => internalError(message, exports.SESSION_ERROR);
+
+exports.CRYPTO_COIN_API_ERROR = 'crypto_coin_api_error';
+exports.crytpoCoinApiError = message => internalError(message, exports.CRYPTO_COIN_API_ERROR);
+
+exports.ITEM_NOT_FOUND_ERROR = 'item_not_found_error';
+exports.itemNotFoundError = message => internalError(message, exports.ITEM_NOT_FOUND_ERROR);
+
+exports.UNIQUE_USER_COIN_ERROR = 'unique_user_coin_error';
+exports.uniqueUserCoinError = message => internalError(message, exports.UNIQUE_USER_COIN_ERROR);

@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       id: { type: DataTypes.STRING, primaryKey: true, allowNull: false },
       coinName: { type: DataTypes.STRING, field: 'coin_name', allowNull: false },
       source: { type: DataTypes.STRING, allowNull: false },
-      price: { type: DataTypes.STRING, allowNull: false }
+      price: { type: DataTypes.STRING, allowNull: false },
+      userId: { type: DataTypes.INTEGER, primaryKey: true }
     },
     {
       tableName: 'crypto_coins',

@@ -39,10 +39,20 @@ const config = {
       port: process.env.PORT
     },
     session: {
-      header_name: 'authorization',
+      headerName: 'authorization',
       expirationTime: process.env.JWT_EXPIRATION_TIME,
       secret: process.env.NODE_API_SESSION_SECRET,
       saltRounds: process.env.ENCRYPTION_SALT_ROUNDS
+    },
+    braveNewCoinApi: {
+      endpoint: process.env.BNC_API_ENDPOINT,
+      routes: {
+        ticker: process.env.BNC_API_TICKER_ROUTE
+      },
+      hostHeaderName: process.env.BNC_HOST_HEADER_NAME,
+      keyHeaderName: process.env.BCN_KEY_HEADER_NAME,
+      host: process.env.BCN_HOST,
+      key: process.env.BCN_KEY
     }
   }
 };
