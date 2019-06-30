@@ -17,7 +17,7 @@ exports.addCryptoCoin = (req, res, next) => {
           .addCoin(objectMapper.mapCoinObject(coin, user.id))
           .then(addedCoin =>
             res
-              .status(200)
+              .status(201)
               .send({ message: `Added coin ${addedCoin.id} to user with id ${addedCoin.userId}` })
           );
       }

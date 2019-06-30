@@ -30,3 +30,10 @@ exports.addCoin = coin =>
         ? Promise.reject(errors.uniqueUserCoinError('User has already addded this coin.'))
         : Promise.reject(errors.databaseError(`${error.name}: ${error.message}`))
     );
+
+exports.getUserCoins = userId =>
+  CryptoCoin.findAll({
+    where: { userId },
+    attributes: ['id', 'coinName', 'source', 'price'],
+    raw: true
+  }).catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.message}`)));

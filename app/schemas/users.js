@@ -50,3 +50,16 @@ exports.logIn = {
     errorMessage: 'Please enter a valid password'
   }
 };
+
+exports.getUserCoinsList = {
+  id: {
+    in: ['params'],
+    isInt: true,
+    toInt: true,
+    custom: {
+      options: (value, { req }) => value === req.session.id,
+      errorMessage: 'Auhtenticated user can only list their own coins'
+    },
+    errorMessage: 'Please enter a valid numeric id'
+  }
+};
