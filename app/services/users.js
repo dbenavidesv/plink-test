@@ -14,3 +14,8 @@ exports.findUserBy = params =>
   User.findOne({ where: params, raw: true }).catch(error =>
     Promise.reject(errors.databaseError(`${error.name}: ${error.message}`))
   );
+
+exports.getPreferredCurrency = id =>
+  User.findOne({ where: { id }, attributes: ['preferredCurrency'], raw: true }).catch(error =>
+    Promise.reject(errors.databaseError(`${error.name}: ${error.message}`))
+  );

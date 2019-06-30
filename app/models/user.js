@@ -18,8 +18,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       tableName: 'users',
-      underscored: true
+      underscored: true,
+      paranoid: true
     }
   );
+
+  User.associate = models => {
+    User.hasMany(models.CryptoCoin);
+  };
+
   return User;
 };

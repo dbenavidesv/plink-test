@@ -1,6 +1,6 @@
-const requestsHelpers = require('../helpers/requests');
+const objectMapper = require('../mappers/objects');
 
 exports.bodyToCamelCase = (req, res, next) => {
-  req.body = requestsHelpers.keysToCamelCase(req.body);
+  req.body = objectMapper.keysToCamelCase(req.body);
   return next();
 };
