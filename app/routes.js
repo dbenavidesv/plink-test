@@ -24,6 +24,15 @@ exports.init = app => {
     users.geUserCoinsList
   );
 
+  app.get(
+    '/users/:id?/top-crypto-coins',
+    [
+      sessionsMiddleware.isUserAuthenticated,
+      squemaValidator.validateSchemaAndFail(usersSchemas.getUserTopCoins)
+    ],
+    users.getUserTopCoins
+  );
+
   app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);
 
   app.post('/crypto-coins/:id', [sessionsMiddleware.isUserAuthenticated], cryptoCoins.addCryptoCoin);
