@@ -1,6 +1,6 @@
 const request = require('supertest');
 
-const utils = require('../utils');
+const userObjects = require('../utils/objects/users');
 const app = require('../../app');
 const errors = require('../../app/errors');
 const { User } = require('../../app/models');
@@ -9,7 +9,7 @@ describe('POST /users', () => {
   it('Should successfully register a new user', () =>
     request(app)
       .post('/users')
-      .send(utils.testUser)
+      .send(userObjects.testUser)
       .then(response => {
         expect(response.statusCode).toBe(201);
         expect(response.body).toHaveProperty('message', expect.any(String));
@@ -18,7 +18,7 @@ describe('POST /users', () => {
   it('Should fail to register user due to wrong input fields', () =>
     request(app)
       .post('/users')
-      .send(utils.wrongTestUser)
+      .send(userObjects.wrongTestUser)
       .then(response => {
         expect(response.statusCode).toBe(422);
         expect(response.body).toHaveProperty('message', expect.any(Array));
@@ -28,11 +28,11 @@ describe('POST /users', () => {
   it('Should fail to register user due to username in use', () =>
     request(app)
       .post('/users')
-      .send(utils.testUser)
+      .send(userObjects.testUser)
       .then(() =>
         request(app)
           .post('/users')
-          .send(utils.testUser)
+          .send(userObjects.testUser)
       )
       .then(response => {
         expect(response.statusCode).toBe(409);
@@ -47,7 +47,7 @@ describe('POST /users', () => {
     );
     return request(app)
       .post('/users')
-      .send(utils.testUser)
+      .send(userObjects.testUser)
       .then(response => {
         expect(response.statusCode).toBe(503);
         expect(response.body).toHaveProperty('message', expect.any(String));
