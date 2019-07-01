@@ -21,6 +21,30 @@ describe('POST /crypto-coins/:id', () => {
         expect(response.body).toHaveProperty('message', expect.any(String));
       }));
 
+  it('Should fail to add the same coin to the same user twice', () => {
+    let token = '';
+    return userHelpers
+      .createUserAndLogIn()
+      .then(session => {
+        coinMocks.mockCoinApiOK();
+        token = session.headers.authorization;
+        return request(app)
+          .post('/crypto-coins/BTC')
+          .set({ authorization: token });
+      })
+      .then(() => {
+        coinMocks.mockCoinApiOK();
+        return request(app)
+          .post('/crypto-coins/BTC')
+          .set({ authorization: token });
+      })
+      .then(response => {
+        expect(response.statusCode).toBe(409);
+        expect(response.body).toHaveProperty('message', expect.any(String));
+        expect(response.body).toHaveProperty('internal_code', errors.UNIQUE_USER_COIN_ERROR);
+      });
+  });
+
   it('Should fail to find the requested coin', () =>
     userHelpers
       .createUserAndLogIn()

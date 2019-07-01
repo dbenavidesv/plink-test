@@ -17,3 +17,40 @@ exports.coinApiTickerNotFound = {
   success: false,
   error: 'The coin specified is not available'
 };
+
+exports.coinBTC = {
+  id: 'BTC',
+  coinName: 'BitCoin',
+  source: 'BraveNewCoin',
+  price: '9884.69312003'
+};
+
+exports.coinLTC = {
+  id: 'LTC',
+  coinName: 'Litecoin',
+  source: 'BraveNewCoin',
+  price: '120.45536806'
+};
+
+exports.coinETH = {
+  id: 'ETH',
+  coinName: 'Ethereum',
+  source: 'BraveNewCoin',
+  price: '288.94060383'
+};
+
+exports.coinZEC = {
+  id: 'ZEC',
+  coinName: 'Zcash',
+  source: 'BraveNewCoin',
+  price: '103.07104273'
+};
+
+exports.coinXRP = {
+  id: 'XRP',
+  coinName: 'Zcash',
+  source: 'BraveNewCoin',
+  price: '0.40085439'
+};
+
+exports.coinsArray = [this.coinBTC, this.coinETH, this.coinLTC, this.coinXRP, this.coinZEC];
