@@ -7,6 +7,7 @@ const statusCodes = {
   [errors.DATABASE_ERROR]: 503,
   [errors.DEFAULT_ERROR]: 500,
   [errors.UNIQUE_USERNAME_ERROR]: 409,
+  [errors.INVALID_INPUT_ERROR]: 422,
   [errors.BAD_LOGIN_ERROR]: 403,
   [errors.SESSION_ERROR]: 440,
   [errors.ITEM_NOT_FOUND_ERROR]: 404,
