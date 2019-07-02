@@ -15,10 +15,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      price: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       user_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,

@@ -1,9 +1,5 @@
-exports.sortByPrice = (coins, order) => {
-  const coinsFloat = coins.map(coin => ({
-    ...coin,
-    price: parseFloat(coin.price)
-  }));
-  return coinsFloat.sort((a, b) => {
+exports.sortByPrice = (coins, order) =>
+  coins.sort((a, b) => {
     let left = a;
     let right = b;
     if (order === 'ASC') {
@@ -18,7 +14,6 @@ exports.sortByPrice = (coins, order) => {
     }
     return 0;
   });
-};
 
 exports.getSortedTopCoins = (coins, top, order) => {
   const sortedCoins = this.sortByPrice(coins, order);
