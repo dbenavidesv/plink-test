@@ -34,6 +34,11 @@ exports.addCoin = coin =>
 exports.getUserCoins = userId =>
   CryptoCoin.findAll({
     where: { userId },
-    attributes: ['id', 'coinName', 'source', 'price'],
+    attributes: ['id', 'coinName', 'source'],
     raw: true
   }).catch(error => Promise.reject(errors.databaseError(`${error.name}: ${error.message}`)));
+
+exports.getCoinsTicker = (coins, preferredCurrency) =>
+  Promise.all(coins.map(coin => this.getCoin({ coin: coin.id, show: preferredCurrency }))).catch(error =>
+    Promise.reject(errors.crytpoCoinApiError(`${error.name}: ${error.message}`))
+  );
