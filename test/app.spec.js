@@ -1,8 +1,10 @@
 'use strict';
 
-const fs = require('fs'),
-  models = require('../app/models'),
-  path = require('path');
+const fs = require('fs');
+const path = require('path');
+
+const models = require('../app/models');
+const db = require('../app/models').sequelize;
 
 const tables = Object.values(models.sequelize.models);
 
@@ -13,6 +15,10 @@ const truncateDatabase = () => Promise.all(tables.map(truncateTable));
 
 beforeEach(done => {
   truncateDatabase().then(() => done());
+});
+
+afterAll(done => {
+  db.close().then(() => done());
 });
 
 // including all test files

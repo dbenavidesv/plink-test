@@ -1,7 +1,7 @@
 const errors = require('../errors');
 const logger = require('../logger');
-const objectMapper = require('../mappers/objects');
 const cryptoCoinsHelpers = require('../helpers/crypto_coins');
+const objectMapper = require('../mappers/objects');
 const cryptoCoinsService = require('../services/crypto_coins');
 
 exports.addCryptoCoin = (req, res, next) => {
@@ -29,19 +29,19 @@ exports.geUserCoinsList = (req, res, next) => {
     .getUserCoins(userId)
     .then(coins => {
       if (coins.length === 0) {
-        return res.status(200).send({ message: 'User has not added any crypto coins yet' });
+        return res.status(200).send({ message: 'User has not added any crypto coins yet', cryptoCoins: [] });
       }
-      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTikcer =>
+      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTicker =>
         res.status(200).send({
           message: 'User crypto coins list obtained',
-          cryptoCoins: objectMapper.mapCoinsArray(coinsTikcer)
+          cryptoCoins: objectMapper.mapCoinsArray(coinsTicker)
         })
       );
     })
     .catch(next);
 };
 
-exports.getTopUserCoins = (req, res, next) => {
+exports.getUserTopCoins = (req, res, next) => {
   logger.info(`${req.method} ${req.path} start... Get user top crypto coins.`);
   const { userId, order, top } = req.query;
   const { preferredCurrency } = req.session;
@@ -49,11 +49,11 @@ exports.getTopUserCoins = (req, res, next) => {
     .getUserCoins(userId)
     .then(coins => {
       if (coins.length === 0) {
-        return res.status(200).send({ message: 'User has not added any crypto coins yet' });
+        return res.status(200).send({ message: 'User has not added any crypto coins yet', cryptoCoins: [] });
       }
-      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTikcer => {
+      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTicker => {
         const topCoins = cryptoCoinsHelpers.getSortedTopCoins(
-          objectMapper.mapCoinsArray(coinsTikcer),
+          objectMapper.mapCoinsArray(coinsTicker),
           top,
           order
         );
