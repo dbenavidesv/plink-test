@@ -29,19 +29,19 @@ exports.geUserCoinsList = (req, res, next) => {
     .getUserCoins(userId)
     .then(coins => {
       if (coins.length === 0) {
-        return res.status(200).send({ message: 'User has not added any crypto coins yet' });
+        return res.status(200).send({ message: 'User has not added any crypto coins yet', cryptoCoins: [] });
       }
-      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTikcer =>
+      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTicker =>
         res.status(200).send({
           message: 'User crypto coins list obtained',
-          cryptoCoins: objectMapper.mapCoinsArray(coinsTikcer)
+          cryptoCoins: objectMapper.mapCoinsArray(coinsTicker)
         })
       );
     })
     .catch(next);
 };
 
-exports.getTopUserCoins = (req, res, next) => {
+exports.getUserTopCoins = (req, res, next) => {
   logger.info(`${req.method} ${req.path} start... Get user top crypto coins.`);
   const { userId, order, top } = req.query;
   const { preferredCurrency } = req.session;
@@ -49,11 +49,11 @@ exports.getTopUserCoins = (req, res, next) => {
     .getUserCoins(userId)
     .then(coins => {
       if (coins.length === 0) {
-        return res.status(200).send({ message: 'User has not added any crypto coins yet' });
+        return res.status(200).send({ message: 'User has not added any crypto coins yet', cryptoCoins: [] });
       }
-      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTikcer => {
+      return cryptoCoinsService.getCoinsTicker(coins, preferredCurrency).then(coinsTicker => {
         const topCoins = cryptoCoinsHelpers.getSortedTopCoins(
-          objectMapper.mapCoinsArray(coinsTikcer),
+          objectMapper.mapCoinsArray(coinsTicker),
           top,
           order
         );
@@ -62,37 +62,6 @@ exports.getTopUserCoins = (req, res, next) => {
           cryptoCoins: topCoins
         });
       });
-    })
-    .catch(next);
-};
-
-exports.geUserCoinsList = (req, res, next) => {
-  logger.info(`${req.method} ${req.path} start... Get user crypto coins list.`);
-  const userId = req.params.id;
-  return cryptoCoinsService
-    .getUserCoins(userId)
-    .then(coins =>
-      coins.length === 0
-        ? res.status(200).send({ message: 'User has not added any crypto coins yet' })
-        : res.status(200).send({ message: 'User crypto coins list obtained', cryptoCoins: coins })
-    )
-    .catch(next);
-};
-
-exports.getUserTopCoins = (req, res, next) => {
-  logger.info(`${req.method} ${req.path} start... Get user top crypto coins.`);
-  const { userId, order, top } = req.query;
-  logger.info(userId, order, top);
-  return cryptoCoinsService
-    .getUserCoins(userId)
-    .then(coins => {
-      if (coins.length === 0) {
-        return res.status(200).send({ message: 'User has not added any crypto coins yet' });
-      }
-      const topCoins = cryptoCoinsHelpers.getSortedTopCoins(coins, top, order);
-      return res
-        .status(200)
-        .send({ message: `User top ${top} crypto coins list obtained`, cryptoCoins: topCoins });
     })
     .catch(next);
 };

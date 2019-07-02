@@ -1,4 +1,5 @@
 const request = require('supertest');
+const nock = require('nock');
 
 // const utilCoinObjects = require('../utils//objects/crypto_coins');
 const coinMocks = require('../utils/mocks/crypto_coins');
@@ -11,7 +12,8 @@ describe('POST /crypto-coins/:id', () => {
     userHelpers
       .createUserAndLogIn()
       .then(session => {
-        coinMocks.mockCoinApiOK();
+        nock.cleanAll();
+        coinMocks.mockGetCoinOK({ coin: 'BTC' });
         return request(app)
           .post('/crypto-coins/BTC')
           .set({ authorization: session.headers.authorization });
@@ -26,14 +28,16 @@ describe('POST /crypto-coins/:id', () => {
     return userHelpers
       .createUserAndLogIn()
       .then(session => {
-        coinMocks.mockCoinApiOK();
+        nock.cleanAll();
+        coinMocks.mockGetCoinOK({ coin: 'BTC' });
         token = session.headers.authorization;
         return request(app)
           .post('/crypto-coins/BTC')
           .set({ authorization: token });
       })
       .then(() => {
-        coinMocks.mockCoinApiOK();
+        nock.cleanAll();
+        coinMocks.mockGetCoinOK({ coin: 'BTC' });
         return request(app)
           .post('/crypto-coins/BTC')
           .set({ authorization: token });
@@ -49,7 +53,7 @@ describe('POST /crypto-coins/:id', () => {
     userHelpers
       .createUserAndLogIn()
       .then(session => {
-        coinMocks.mockCoinApiItemNotFound();
+        coinMocks.mockGetCoinNotFound();
         return request(app)
           .post('/crypto-coins/ABDCEFG')
           .set({ authorization: session.headers.authorization });
@@ -64,7 +68,7 @@ describe('POST /crypto-coins/:id', () => {
     userHelpers
       .createUserAndLogIn()
       .then(session => {
-        coinMocks.mockCoinApiFailure();
+        coinMocks.mockGetCoinFailure();
         return request(app)
           .post('/crypto-coins/BTC')
           .set({ authorization: session.headers.authorization });

@@ -31,10 +31,10 @@ exports.init = app => {
     '/users/:id?/top-crypto-coins',
     [
       sessionsMiddleware.isUserAuthenticated,
-      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getTopUserCoins),
+      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getUserTopCoins),
       usersMiddleware.getUserInfo
     ],
-    cryptoCoins.getTopUserCoins
+    cryptoCoins.getUserTopCoins
   );
 
   app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);

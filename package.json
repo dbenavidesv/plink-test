@@ -45,9 +45,12 @@
       "!**/node_modules/**",
       "!**/build/**",
       "!**/migrations/**",
+      "!**/seeders/**",
+      "!**/coverage/**",
       "!**/config/**",
       "!**/scripts/**",
-      "!**/docs/**"
+      "!**/docs/**",
+      "!**/server.js"
     ],
     "testEnvironment": "node",
     "transform": {

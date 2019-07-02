@@ -11,7 +11,7 @@ exports.getUserCoinsList = {
   }
 };
 
-exports.getTopUserCoins = {
+exports.getUserTopCoins = {
   id: {
     in: ['params'],
     optional: true,

@@ -1,16 +1,40 @@
-exports.coinApiTickerResponse = {
+exports.coinApiTickerBTC = {
   success: true,
   source: 'BraveNewCoin',
-  time_stamp: '1562008561',
-  utc_date: '2019-07-01 19:16:01',
   coin_id: 'BTC',
   coin_name: 'Bitcoin',
-  last_price: '10147.70215039',
-  price_24hr_pcnt: '-9.17',
-  volume_24hr: '10054189057',
-  vol_24hr_pcnt: '23.31',
-  currency: 'USD',
-  currency_name: 'United States Dollar'
+  last_price: '10147.70215039'
+};
+
+exports.coinApiTickerLTC = {
+  success: true,
+  source: 'BraveNewCoin',
+  coin_id: 'LTC',
+  coin_name: 'Litecoin',
+  last_price: '118.89371009'
+};
+
+exports.coinApiTickerETH = {
+  success: true,
+  source: 'BraveNewCoin',
+  coin_id: 'ETH',
+  coin_name: 'Ethereum',
+  last_price: '286.64463867'
+};
+exports.coinApiTickerZEC = {
+  success: true,
+  source: 'BraveNewCoin',
+  coin_id: 'ZEC',
+  coin_name: 'Zcash',
+  last_price: '100.57648012'
+};
+
+exports.coinApiTickerXRP = {
+  success: true,
+  source: 'BraveNewCoin',
+  coin_id: 'XRP',
+  coin_name: 'Ripple',
+  last_price: '0.40163527'
 };
 
 exports.coinApiTickerNotFound = {
@@ -18,39 +42,16 @@ exports.coinApiTickerNotFound = {
   error: 'The coin specified is not available'
 };
 
-exports.coinBTC = {
-  id: 'BTC',
-  coinName: 'BitCoin',
-  source: 'BraveNewCoin',
-  price: '9884.69312003'
-};
+exports.coinMapper = coin => ({
+  id: coin.coin_id,
+  coinName: coin.coin_name,
+  source: coin.source
+});
 
-exports.coinLTC = {
-  id: 'LTC',
-  coinName: 'Litecoin',
-  source: 'BraveNewCoin',
-  price: '120.45536806'
-};
+exports.coinBTC = this.coinMapper(this.coinApiTickerBTC);
+exports.coinLTC = this.coinMapper(this.coinApiTickerLTC);
+exports.coinETH = this.coinMapper(this.coinApiTickerETH);
+exports.coinZEC = this.coinMapper(this.coinApiTickerZEC);
+exports.coinXRP = this.coinMapper(this.coinApiTickerXRP);
 
-exports.coinETH = {
-  id: 'ETH',
-  coinName: 'Ethereum',
-  source: 'BraveNewCoin',
-  price: '288.94060383'
-};
-
-exports.coinZEC = {
-  id: 'ZEC',
-  coinName: 'Zcash',
-  source: 'BraveNewCoin',
-  price: '103.07104273'
-};
-
-exports.coinXRP = {
-  id: 'XRP',
-  coinName: 'Zcash',
-  source: 'BraveNewCoin',
-  price: '0.40085439'
-};
-
-exports.coinsArray = [this.coinBTC, this.coinETH, this.coinLTC, this.coinXRP, this.coinZEC];
+exports.coinsArray = [this.coinBTC, this.coinLTC, this.coinETH, this.coinZEC, this.coinXRP];

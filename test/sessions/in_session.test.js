@@ -5,7 +5,7 @@ const sessionHelpers = require('../utils/helpers/sessions');
 const app = require('../../app');
 const errors = require('../../app/errors');
 
-describe('POST /crypto-coins (endpoint which needs authentication)', () => {
+describe('POST /(endpoint which needs authentication)', () => {
   it('Should fail due to not token provided', () =>
     userHelpers
       .createUserAndLogIn()
