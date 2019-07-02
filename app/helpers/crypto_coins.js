@@ -1,19 +1,5 @@
 exports.sortByPrice = (coins, order) =>
-  coins.sort((a, b) => {
-    let left = a;
-    let right = b;
-    if (order === 'ASC') {
-      left = b;
-      right = a;
-    }
-    if (left.price > right.price) {
-      return -1;
-    }
-    if (left.price < right.price) {
-      return 1;
-    }
-    return 0;
-  });
+  coins.sort((prev, next) => (order === 'ASC' ? prev.price - next.price : next.price - prev.price));
 
 exports.getSortedTopCoins = (coins, top, order) => {
   const sortedCoins = this.sortByPrice(coins, order);

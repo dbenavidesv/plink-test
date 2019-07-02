@@ -1,7 +1,7 @@
 # plink-test
 
 Plink acceptance test project. 
-To run this project follow the installation instructions below and the run ```npm start``` from the project root folder.
+To run this project follow the installation instructions below and then execute ```npm start``` from the project's root folder.
 
 ## First steps
 
