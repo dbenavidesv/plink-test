@@ -14,7 +14,7 @@ exports.logIn = (req, res, next) => {
           .comparePassword(inUser.password, user.password)
           .then(isPassword => (isPassword ? sessionsHelpers.generateToken(user) : null));
       }
-      return null;
+      throw errors.badLogInError('The username or password provided is incorrect');
     })
     .then(token => {
       if (token) {
@@ -26,7 +26,7 @@ exports.logIn = (req, res, next) => {
             expirationTime: `${sessionsHelpers.getExpirationTime(token)}`
           });
       }
-      return Promise.reject(errors.badLogInError('The username or password provided is incorrect'));
+      throw errors.badLogInError('The username or password provided is incorrect');
     })
     .catch(next);
 };

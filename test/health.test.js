@@ -3,7 +3,7 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('GET /health', () => {
-  it('Should responde 200 OK showing the uptime', () =>
+  it('Should respond 200 OK showing the uptime', () =>
     request(app)
       .get('/health')
       .then(response => {
