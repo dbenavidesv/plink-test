@@ -16,6 +16,13 @@ exports.mapCoinObject = (coin, userId) => ({
   id: coin.coin_id,
   coinName: coin.coin_name,
   source: coin.source,
-  price: coin.last_price,
   userId
 });
+
+exports.mapCoinsArray = coins =>
+  coins.map(coin => ({
+    id: coin.coin_id,
+    coinName: coin.coin_name,
+    price: parseFloat(coin.last_price),
+    source: coin.source
+  }));

@@ -5,6 +5,7 @@ const sessions = require('./controllers/sessions');
 const mappersMiddleware = require('./middlewares/mappers');
 const squemaValidator = require('./middlewares/schema_validator');
 const sessionsMiddleware = require('./middlewares/sessions');
+const usersMiddleware = require('./middlewares/users');
 const usersSchemas = require('./schemas/users');
 const cryptoCoinsSchemas = require('./schemas/crypto_coins');
 
@@ -20,7 +21,8 @@ exports.init = app => {
     '/users/:id/crypto-coins',
     [
       sessionsMiddleware.isUserAuthenticated,
-      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getUserCoinsList)
+      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getUserCoinsList),
+      usersMiddleware.getUserInfo
     ],
     cryptoCoins.geUserCoinsList
   );
@@ -29,9 +31,10 @@ exports.init = app => {
     '/users/:id?/top-crypto-coins',
     [
       sessionsMiddleware.isUserAuthenticated,
-      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getUserTopCoins)
+      squemaValidator.validateSchemaAndFail(cryptoCoinsSchemas.getTopUserCoins),
+      usersMiddleware.getUserInfo
     ],
-    cryptoCoins.getUserTopCoins
+    cryptoCoins.getTopUserCoins
   );
 
   app.post('/sessions', [squemaValidator.validateSchemaAndFail(usersSchemas.logIn)], sessions.logIn);
