@@ -22,11 +22,11 @@ Before running the app, make sure you have [postgresql installed](https://www.di
 Then, set in `.env` some variables:
 - DB_HOST=localhost
 - DB_PORT=5432
-- DB_USERNAME=project_name
-- DB_PASSWORD=project_name
-- DB_NAME=db_project_name
-- DB_NAME_DEV=db_project_name_dev
-- DB_NAME_TEST=db_project_name_test
+- DB_USERNAME=postgres
+- DB_PASSWORD=postgres
+- DB_NAME=w-plink
+- DB_NAME_DEV=w-plink-dev
+- DB_NAME_TEST=w-plink-test
 
 ### Migrations
 
@@ -45,13 +45,21 @@ By default, the environment will be **development**, but you can easily change i
 #### Environment variables
 `Dotenv` is used for managing environment variables. They are stored in the `/.env` file. Take into account that the variables defined in the `bashrc` are not overrided.
 
-The environment variables should be added to the `.env` file in the form of `NAME=VALUE`, as the following example:
+The environment variables should be added to the `.env` file in the form of `NAME=VALUE`, as follows:
 ```
-DB_USERNAME=root
-DB_PASS=superpass
-DB_PASSWORD=superpass
-PORT=8081
-CLIENTS_API=http://api.clients.example.org/
+// Sessions
+- NODE_API_SESSION_SECRET=super-secret-secret
+- JWT_EXPIRATION_TIME=1h
+- ENCRYPTION_SALT_ROUNDS=10
+
+// Brave New Coin API
+- BNC_API_ENDPOINT=https://bravenewcoin-v1.p.rapidapi.com
+- BNC_API_TICKER_ROUTE=ticker
+- BNC_HOST_HEADER_NAME=X-RapidAPI-Host
+- BCN_KEY_HEADER_NAME=X-RapidAPI-Key 
+- BCN_HOST=bravenewcoin-v1.p.rapidapi.com
+- BCN_KEY=36f39e8fb0msh8d022c9561b2302p16963bjsnc13aa0e8b688
+
 ```
 
 **Remember not to push nor commit the `.env` file.**
